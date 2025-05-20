@@ -1,12 +1,65 @@
-# React + Vite
+# Tasker - Task Management App  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview  
+Tasker is a clean, responsive task management application built with React. It allows users to:  
+- Create, edit, and delete tasks  
+- Mark tasks as favorites  
+- Search through tasks  
+- Toggle between light/dark mode  
 
-Currently, two official plugins are available:
+## Features  
+✅ **Task Management**  
+- Add new tasks with title, description, tags, and priority  
+- Edit existing tasks  
+- Delete single or all tasks  
+- Toggle task favorites  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔍 **Search Functionality**  
+- Instant search by title or description  
 
-## Expanding the ESLint configuration
+🌓 **Dark/Light Mode**  
+- System-aware theme switching  
+- Persists user preference  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+⏰ **Live Clock**  
+- Displays current date and time  
+
+## Technologies Used  
+- React (Vite)  
+- Tailwind CSS  
+- React Icons  
+- useReducer for state management  
+- Context API for theme switching  
+
+## Installation  
+1. Clone the repository  
+2. Install dependencies:  
+```bash
+npm install
+```  
+3. Run the development server:  
+```bash
+npm run dev
+```  
+
+## Project Structure  
+```
+/src  
+├── /components  
+│   ├── TaskBoard.jsx        # Main task management component  
+│   ├── TaskList.jsx         # Task display component  
+│   ├── TaskModal.jsx        # Add/edit task form  
+│   └── ...                  # Other UI components  
+├── /context  
+│   └── ThemeContext.js      # Dark mode context  
+└── App.jsx                  # Root component
+└── CurrentTime.jsx          # Root component
+└── index.css                # Root component  
+└── main.jsx                 # Root component  
+```
+
+## Screenshots  
+(Add your screenshots here if available)  
+
+## License  
+MIT
