@@ -57,9 +57,3 @@ npm run dev
 └── index.css                # Root component  
 └── main.jsx                 # Root component  
 ```
-
-## Screenshots  
-(Add your screenshots here if available)  
-
-## License  
-MIT
