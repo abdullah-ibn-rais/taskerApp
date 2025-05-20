@@ -1,83 +1,72 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import SearchTask from "./SearchTask";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
 import TaskModal from "./TaskModal";
 import NoTasksMessage from "./NoTaskMessage";
+import taskReducer from "./taskReducer";
+
+const initialState = {
+  tasks: [],
+  tasksBackup: [],
+
+  isModalOpen: false,
+  taskToUpdate: null,
+};
 
 export default function TaskBoard() {
-  const defaultTask = [];
-
-  const [tasks, setTasks] = useState([...defaultTask]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [taskToUpdate, setTaskToUpdate] = useState(null);
-  const [tasksBackup, setTasksBackup] = useState([...defaultTask]);
+  const [state, dispatch] = useReducer(taskReducer, initialState);
+  const { tasks, isModalOpen, taskToUpdate } = state;
 
   function handleAddTask(task, shouldUpdate) {
-    let updatedTasks;
-    if (shouldUpdate) {
-      updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
-      setTaskToUpdate(null);
-    } else updatedTasks = [...tasks, task];
-    setTasks(updatedTasks);
-    setTasksBackup(updatedTasks);
+    dispatch({
+      type: "added",
+      task,
+      shouldUpdate,
+    });
   }
 
   function handleEditTask(task) {
-    setTaskToUpdate(task);
-    setIsModalOpen(true);
+    dispatch({
+      type: "edited",
+      task,
+    });
   }
 
   function handleDeleteTask(id) {
-    let updatedTasks;
-    updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-    setTasksBackup(updatedTasks);
+    dispatch({
+      type: "deleted",
+      id,
+    });
   }
 
   function handleDeleteAllClick() {
-    let updatedTasks;
-    if (window.confirm("Are you sure you want to delete all tasks?")) {
-      updatedTasks = [];
-    }
-    setTasks(updatedTasks);
-    setTasksBackup(updatedTasks);
+    dispatch({
+      type: "deleted_all",
+    });
   }
 
   function handleToggleFavorite(id) {
-    let updatedTasks;
-    updatedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, isFavorite: !task.isFavorite }; // Correctly toggle isFavorite
-      }
-      return task; // If task.id doesn't match, return the task unchanged
+    dispatch({
+      type: "favorite",
+      id,
     });
-    setTasks(updatedTasks);
-    setTasksBackup(updatedTasks);
   }
 
   function handleOnSearch(searchTerm) {
-    if (searchTerm === "") {
-      setTasks([...tasksBackup]);
-      return;
-    }
-    const searchedTasks = tasks.filter((task) => {
-      return (
-        task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        task.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+    dispatch({
+      type: "search",
+      searchTerm,
     });
-
-    setTasks([...searchedTasks]);
   }
 
   return (
     <>
-      <div className="container mx-auto px-4 py-6 my-8 max-w-7xl dark:bg-gray-800 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 transition-all">
+      <div className="container mx-auto px-4 py-6 my-8 dark:bg-gray-800 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 transition-all">
         {isModalOpen && (
           <TaskModal
             onSave={handleAddTask}
-            onClose={() => setIsModalOpen(false)}
+            onClose={() => dispatch({ type: "toggle_modal", value: false })}
             taskToUpdate={taskToUpdate}
           />
         )}
@@ -94,7 +83,7 @@ export default function TaskBoard() {
 
             {/* Task Adding Buttons */}
             <TaskActions
-              onAddClick={() => setIsModalOpen(true)}
+              onAddClick={() => dispatch({ type: "toggle_modal", value: true })}
               onDeleteAllClick={handleDeleteAllClick}
             />
           </div>
@@ -113,40 +102,3 @@ export default function TaskBoard() {
     </>
   );
 }
-
-// {
-//   id: crypto.randomUUID(),
-//   title: "Learn React",
-//   description:
-//     "I want to Learn React such than I can treat it like my slave and make it do whatever I want to do.",
-//   tags: ["web", "react", "js"],
-//   priority: "High",
-//   isFavorite: true,
-// },
-// {
-//   id: crypto.randomUUID(),
-//   title: "Learn vue",
-//   description:
-//     "I want to Learn React hahaha I can treat it like my slave and make it do whatever I want to do.",
-//   tags: ["web", "react", "js"],
-//   priority: "High",
-//   isFavorite: true,
-// },
-// {
-//   id: crypto.randomUUID(),
-//   title: "Learn React",
-//   description:
-//     "I want to Learn React hahaha I can treat it like my slave and make it do whatever I want to do.",
-//   tags: ["web", "react", "js"],
-//   priority: "High",
-//   isFavorite: true,
-// },
-// {
-//   id: crypto.randomUUID(),
-//   title: "Learn bla",
-//   description:
-//     "I want to Learn React hahaha I can treat it like my slave and make it do whatever I want to do.",
-//   tags: ["web", "react", "js"],
-//   priority: "High",
-//   isFavorite: true,
-// },

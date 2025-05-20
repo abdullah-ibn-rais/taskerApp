@@ -53,30 +53,23 @@ function Header() {
 
 function HeroSection() {
   return (
-    <section className="pt-28 pb-6 md:pt-32 md:pb-6">
+    <section className="pt-35 pb-6 md:pt-38 md:pb-6">
       <div className="container mx-auto px-4">
-        <div className="grid items-center gap-8 md:grid-cols-2">
-          <div className="order-2 md:order-1">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-              Manage Tasks{" "}
-              <span className="text-blue-600 dark:text-blue-400">
-                Effortlessly
-              </span>
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-              Organize, prioritize, and conquer tasks with Tasker — your
-              personal productivity ally for seamless goal achievement.
-            </p>
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
+            Manage Tasks{" "}
+            <span className="text-blue-600 dark:text-blue-400">
+              Effortlessly
+            </span>
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            Organize, prioritize, and conquer tasks with Tasker — your personal
+            productivity ally for seamless goal achievement.
+          </p>
+          <div className="flex justify-center">
             <button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
               Get Started
             </button>
-          </div>
-          <div className="hidden md:flex justify-center order-1 md:order-2">
-            <img
-              className=" max-w-sm rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-500  "
-              src="./assets/vecteezy_to-do-list.jpg"
-              alt="Task Management"
-            />
           </div>
         </div>
       </div>

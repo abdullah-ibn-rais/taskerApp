@@ -70,7 +70,6 @@ function TaskModal({ onSave, onClose, taskToUpdate }) {
               id="description"
               value={task.description}
               onChange={handleChange}
-              required
               placeholder="Describe your task"
             />
           </div>
